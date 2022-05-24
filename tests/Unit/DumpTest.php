@@ -19,6 +19,6 @@ class DumpTest extends TestCase
 
         // Assert: verify actual output = expected output
         // or Then: the result is expected to be
-        $this->assertTrue($output === 3);
+        $this->assertTrue($output === 2);
     }
 }
