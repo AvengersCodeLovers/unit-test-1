@@ -31,27 +31,6 @@ class UsernameValidationTest extends TestCase
     }
 
     /**
-     * Test get message
-     *
-     * @return void
-     */
-    public function test_get_message()
-    {
-        $message = '';
-        $m = Mockery::mock(UsernameValidation::class);
-        $m->shouldReceive('isValid')->with(
-            Mockery::on(function(&$message) {
-                $message = 123;
-                return false;
-            }),
-            Mockery::any()
-        );
-
-        $result = $this->usernameValidation->getMessage();
-        $this->assertEquals($message,$result);
-    }
-
-    /**
      * Test is valid is false
      *
      * @param $data
