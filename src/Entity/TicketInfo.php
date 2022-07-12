@@ -6,9 +6,9 @@ use DateTime;
 
 class TicketInfo
 {
-    public DateTime $bookingDate;
-    public int $gender;
-    public int $age;
+    public $bookingDate;
+    public $gender;
+    public $age;
 
     public function __construct(DateTime $bookingDate, int $gender, int $age)
     {
