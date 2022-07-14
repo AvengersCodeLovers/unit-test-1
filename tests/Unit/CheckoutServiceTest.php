@@ -5,7 +5,6 @@ namespace StdGroup\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use StdGroup\App\CheckoutService;
-use InvalidArgumentException;
 
 class CheckoutServiceTest extends TestCase
 {
@@ -26,24 +25,10 @@ class CheckoutServiceTest extends TestCase
      * 
      * @return void
      */
-    public function test_calculate_shipping_fee_success($data, $expected)
+    public function test_calculate_shipping_fee_success($data, $expected): void
     {
         $result = $this->checkoutService->calculateShippingFee($data);
         $this->assertEquals($result, $expected);
-    }
-
-    /**
-     * Test calculate shipping fee throw exception
-     *
-     * @param $data
-     * @dataProvider data_calculate_shipping_fee_throw_exception
-     * 
-     * @return void
-     */
-    public function test_calculate_shipping_fee_throw_exception($data)
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->checkoutService->calculateShippingFee($data);
     }
 
 
@@ -52,7 +37,7 @@ class CheckoutServiceTest extends TestCase
      *
      * @return array
      */
-    public function data_calculate_shipping_fee_successs()
+    public function data_calculate_shipping_fee_successs(): array
     {
         return [
             [
@@ -65,83 +50,24 @@ class CheckoutServiceTest extends TestCase
             ],
             [
                 [
-                    'amount' => 10,
-                    'premium_member' => false,
-                    'shipping_express' => true,
-                ],
-                1000
-            ],
-            [
-                [
-                    'amount' => 10,
-                    'premium_member' => false,
-                    'shipping_express' => false,
-                ],
-                500
-            ],
-            [
-                [
-                    'amount' => 10,
-                    'premium_member' => true,
-                    'shipping_express' => false,
-                ],
-                0
-            ],
-            [
-                [
-                    'amount' => 5005,
+                    'amount' => 'abcd',
                     'premium_member' => true,
                     'shipping_express' => true,
                 ],
                 500
             ],
-            [
-                [
-                    'amount' => 5005,
-                    'premium_member' => false,
-                    'shipping_express' => true,
-                ],
-                500
-            ],
-            [
-                [
-                    'amount' => 5005,
-                    'premium_member' => false,
-                    'shipping_express' => false,
-                ],
-                0
-            ],
-            [
-                [
-                    'amount' => 5005,
-                    'premium_member' => true,
-                    'shipping_express' => false,
-                ],
-                0
-            ],
-        ];
-    }
-
-    /**
-     * Test data throw exception.
-     *
-     * @return array
-     */
-    public function data_calculate_shipping_fee_throw_exception()
-    {
-        return [
             [
                 [
                     'amount' => -1000,
                     'premium_member' => true,
-                    // 'shipping_express' => true,
+                    'shipping_express' => true,
                 ],
                 500
             ],
             [
                 [
                     'amount' => 10,
-                    // 'premium_member' => false,
+                    'premium_member' => false,
                     'shipping_express' => true,
                 ],
                 1000
